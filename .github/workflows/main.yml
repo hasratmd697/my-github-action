@@ -22,4 +22,4 @@ jobs:
 
       # This is the specific step your assignment asks for.
       - name: prime-cache-314cb52
-        run: echo "The cache-hit status is: ${{ steps.cache-step.outputs.cache-hit }}"
+        run: echo "The cache-hit status is:${{ steps.cache-step.outputs.cache-hit }}"
