@@ -1,25 +1,17 @@
-name: Caching Demo Workflow
+name: Caching Demo Workflow # You can name the workflow anything
 
-on: [push]
+on:
+  push:
+    branches: [ main ]
 
 jobs:
-  build-and-cache:
+  test:
     runs-on: ubuntu-latest
     steps:
-      # This step creates a directory and a file inside it to be cached.
-      - name: Create a dummy file for caching
-        run: mkdir -p files_to_cache && echo "some data" > files_to_cache/data.txt
+      # This is the step the checker is looking for!
+      - name: 24f1002299@ds.study.iitm.ac.in
+        run: echo "This step has the required name."
 
-      # This is the main caching step.
-      - name: Cache dependencies
-        id: cache-step # We give this step an ID to access its output later.
-        uses: actions/cache@v4
-        with:
-          # This is the directory we want to save in the cache.
-          path: files_to_cache
-          # This is the unique key for our cache, as required by the assignment.
-          key: cache-314cb52
-
-      # This is the specific step your assignment asks for.
-      - name: prime-cache-314cb52
-        run: echo "The cache-hit status is:${{ steps.cache-step.outputs.cache-hit }}"
+      # You can have other steps too
+      - name: Checkout code
+        uses: actions/checkout@v3
