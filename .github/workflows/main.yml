@@ -1,17 +1,24 @@
-name: Caching Demo Workflow # You can name the workflow anything
+name: Assignment Cache Workflow
 
 on:
   push:
     branches: [ main ]
 
 jobs:
-  test:
+  build:
     runs-on: ubuntu-latest
     steps:
-      # This is the step the checker is looking for!
-      - name: 24f1002299@ds.study.iitm.ac.in
-        run: echo "This step has the required name."
-
-      # You can have other steps too
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
+
+      # This is the caching step
+      - name: Cache dependencies
+        id: cache-step # We give it an id to reference its output later
+        uses: actions/cache@v4
+        with:
+          path: ~/.npm # The directory to cache
+          key: cache-314cb52 # The exact key required by the assignment
+
+      # This is the step the assignment checker is looking for
+      - name: prime-cache-314cb52
+        run: echo "Cache hit status:${{ steps.cache-step.outputs.cache-hit }}"
